@@ -4,7 +4,7 @@ import random
 from dataclasses import dataclass
 
 DICTIONARY_PATH = "./data/data.yaml"
-DICTIONARY_PICKLE_PATH = "./data/dict_obj.pickle"
+DICTIONARY_PICKLE_PATH = "./data/dict_obj.pkl"
 
 @dataclass
 class WordDefinition:
