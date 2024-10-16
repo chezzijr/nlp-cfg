@@ -3,21 +3,6 @@ from grammar import Grammar
 from rule import Rule
 import nltk
 
-"""
-noun: danh từ
-interjection: thán từ
-adjective: tính từ
-adverb: trạng từ
-verb: động từ
-prep: giới từ
-auxiliary: trợ từ
-numeral: số từ
-pronoun: đại từ
-determiner: chỉ từ
-conjunction: liên từ
-"Z",  # tu goc han
-"X",  # cum tu
-"""
 
 if __name__ == "__main__":
     d = Dictionary()

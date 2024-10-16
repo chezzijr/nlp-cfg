@@ -1,31 +1,48 @@
 import random
 
+"""
+noun: danh từ
+interjection: thán từ
+adjective: tính từ
+adverb: trạng từ | phó từ
+verb: động từ
+preposition: giới từ
+auxiliary: trợ từ
+numeral: số từ
+pronoun: đại từ
+determiner: lượng từ
+conjunction: liên từ
+"Z",  # tu goc han
+"X",  # cum tu
+"""
+
 rules = {
     "S": [
-        ["NP", "VP"],
-        ["PP", "NP", "VP"],  # bỏ qua trạng ngữ ở các vị trí giữa hoặc cuối câu
+        ["CN", "VN"],
+        ["TN", "CN", "VN"],
     ],
-    "NP": [
-        ["auxiliary", "NP"], # chính ông
+    "TN": [
+        ["adverb"],
+    ],
+    "CN": [
         ["noun"],
-        ["noun", "adjective"],
-        ["noun", "adjective", "PP"],
-        ["numeral", "noun"],
-        ["pronoun"],
-        ["determiner", "noun"],
-        ["determiner", "noun", "adjective"],
-        ["determiner", "noun", "adjective", "PP"],
+        ["noun", "pronoun"],
+        ["danh_ngữ"],
     ],
-    "VP": [
-        ["adjective"],
+    "VN": [
         ["verb"],
-        ["verb", "adverb"],
-        ["verb", "NP"],
+        ["adjective"],
+        ["adverb", "verb"],
+        ["adverb", "adjective"],
+        ["numeral", "noun"],
+        ["determiner", "noun"],
     ],
-    "PP": [["preposition", "NP"]],
+    "danh_ngữ": [["noun", "giới_ngữ"], ["danh_ngữ", "conjunction", "danh_ngữ"], ["noun", "noun"]],
+    "giới_ngữ": [["preposition", "danh_ngữ"]],
 }
 
 ReverseRule = dict[tuple[str, ...], str]
+
 
 class Rule(dict[str, list[list[str]]]):
     def __init__(self, rules: dict[str, list[list[str]]]):
@@ -33,7 +50,7 @@ class Rule(dict[str, list[list[str]]]):
 
     @classmethod
     def from_string(cls, s: str, delimiters: list[str] = ["->", "="]):
-        """ string of type:
+        """string of type:
             S -> NP VP | PP NP VP
             S = NP VP | PP NP VP
         or
@@ -79,7 +96,8 @@ class Rule(dict[str, list[list[str]]]):
             v = self[s]
             new_v = list(filter(lambda x: set(x).isdisjoint(set(self.keys())), v))
             choice = random.choice(new_v if new_v else v)
-            arr = arr[:index] + choice + arr[index + 1:]
+            arr = arr[:index] + choice + arr[index + 1 :]
+        print(arr)
         return arr
 
     @classmethod
