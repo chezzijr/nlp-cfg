@@ -1,0 +1,4 @@
+S = NP VP | PP NP VP
+NP = auxiliary NP | NP interjection | noun | noun adjective | noun adjective PP | numeral noun | pronoun | determiner noun | determiner noun adjective | determiner noun adjective PP
+VP = verb | adjective | verb adverb | verb NP
+PP = preposition NP
