@@ -16,6 +16,7 @@ class Grammar:
     def __init__(self, lexicals: Dictionary, rules: Rule):
         self.rules = rules
         self.lexicals = lexicals
+        self.bigram = BigramModel.load(lexicals)
 
     def nonterminals(self):
         return set(self.rules.keys())
@@ -59,13 +60,16 @@ class Grammar:
         depth: int, the depth of the tree, used to prevent infinite recursion
         if there are nonleave nodes, proceed to clean up
         """
-        bigram = BigramModel.load(self.lexicals)
         structure = self.generate(["S"], depth)
-        print(structure)
-        sentence = []
+        sentence: list[str] = []
         for i, tag in enumerate(structure):
-            print(tag, sentence[-1] if i > 0 else None)
-            word = bigram.generate_word(tag, sentence[-1] if i > 0 else None)
+            # print(tag, sentence[-1] if i > 0 else None)
+            word = self.bigram.generate_word(tag, sentence[-1] if i > 0 else None)
             sentence.append(word)
 
         return sentence
+
+if __name__ == "__main__":
+    g = Grammar(Dictionary(), Rule.default())
+    with open("output/grammar.txt", "w") as f:
+        f.write(str(g))
