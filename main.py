@@ -1,17 +1,18 @@
 from dictionary import Dictionary 
 from grammar import Grammar
 from rule import Rule
-import nltk
+import time
 
+d = Dictionary()
+r = Rule.default()
+g = Grammar(d, r)
 
-if __name__ == "__main__":
-    d = Dictionary()
-    r = Rule.default()
-    g = Grammar(d, r)
-    tokens = g.generate_sentence()
-    sentence = " ".join(tokens)
-    print("Random Sentence:", sentence)
-    cfg = nltk.CFG.fromstring(str(g))
-    parser = nltk.ChartParser(cfg)
-    for t in parser.parse(tokens):
-        print(t)
+num_sentences = 10_000
+start = time.perf_counter()
+with open("output/samples.txt", "a") as f:
+    for i in range(num_sentences):
+        print(f"Generating sentence {i+1}/{num_sentences}", end="\r")
+        tokens = g.generate_sentence()
+        sentence = " ".join(tokens)
+        f.write(sentence + "\n")
+print(f"Generated {num_sentences} sentences in {time.perf_counter() - start:.2f} seconds")
