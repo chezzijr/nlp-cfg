@@ -97,7 +97,6 @@ class Rule(dict[str, list[list[str]]]):
             new_v = list(filter(lambda x: set(x).isdisjoint(set(self.keys())), v))
             choice = random.choice(new_v if new_v else v)
             arr = arr[:index] + choice + arr[index + 1 :]
-        print(arr)
         return arr
 
     @classmethod
