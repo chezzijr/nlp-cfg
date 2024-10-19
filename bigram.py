@@ -27,39 +27,49 @@ class BigramModel:
         if exists(path):
             with open(path, "rb") as f:
                 return pickle.load(f)
+        print("Model not found, creating new model")
         return cls(d, path)
 
-    def get_examples(self, example: str) -> list[str]:
-        list_examples = example.split("~")
-        list_examples = list(map(lambda x: x if '\"' not in x else x.split('\"')[1], list_examples))
-        return list_examples
 
-    def gather_word_prob(self):
-        def word_cnt_str(word: str):
-            word_cnt = 0
-            tokens_posibilities = self.d.tokenize(word)
-            for posibility in tokens_posibilities:
-                for i, token in enumerate(posibility):
-                    word_cnt += 1
-                    self.word_prob[token] += 1
-                    if i > 0:
-                        self.word_conditional_prob[posibility[i - 1]][token] += 1
-            return word_cnt
+    def gather_word_sentence(self):
+        def get_examples(example: str) -> list[str]:
+            list_examples = example.split("~")
+            list_examples = list(map(lambda x: x if '\"' not in x else x.split('\"')[1], list_examples))
+            return list_examples # pyright: ignore
 
-        word_cnt = 0
+        with open("data/corpus.txt", "r") as f:
+            lines = f.readlines()
+        corpus = [line.strip() for line in lines]
         for word in self.d.words():
             w = self.d.word(word)
             for definition in w.definitions:
                 defi = definition.definition
-                word_cnt += word_cnt_str(defi)
+                corpus.append(defi)
 
                 for examples in definition.examples:
                     if examples == "":
                         continue
 
-                    for example in self.get_examples(examples):
-                        word_cnt += word_cnt_str(example)
-                
+                    for example in get_examples(examples):
+                        corpus.append(example)
+        return corpus
+
+
+    def gather_word_prob(self):
+        def word_cnt_str(word: str):
+            tokens_posibilities = self.d.tokenize(word)
+            for posibility in tokens_posibilities:
+                for i, token in enumerate(posibility):
+                    self.word_prob[token] += 1
+                    if i > 0:
+                        self.word_conditional_prob[posibility[i - 1]][token] += 1
+
+        corpus = self.gather_word_sentence()
+        for i, sentence in enumerate(corpus):
+            word_cnt_str(sentence)
+            print(f"Processed {i + 1}/{len(corpus)} sentences", end="\r")
+
+        word_cnt = sum(self.word_prob.values())
         for token in self.word_prob:
             self.word_prob[token] = log(self.word_prob[token] / word_cnt)
 
