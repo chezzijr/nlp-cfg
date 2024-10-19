@@ -23,21 +23,46 @@ rules = {
     ],
     "TN": [
         ["adverb"],
+        ["giới_ngữ"],
     ],
     "CN": [
-        ["noun"],
-        ["noun", "pronoun"],
         ["danh_ngữ"],
     ],
     "VN": [
-        ["verb"],
+        ["hành_động"],
+        ["adverb", "hành_động"],
         ["adjective"],
-        ["adverb", "verb"],
         ["adverb", "adjective"],
-        ["numeral", "noun"],
-        ["determiner", "noun"],
+        ["VN", "conjunction", "VN"],
+        ["VN", "VN"], # dắt chó đi dạo
     ],
-    "danh_ngữ": [["noun", "giới_ngữ"], ["danh_ngữ", "conjunction", "danh_ngữ"], ["noun", "noun"]],
+    "danh_ngữ": [
+        ["noun", "giới_ngữ"],
+        ["noun", "conjunction", "danh_ngữ"],
+        ["noun"],
+    ],
+    "đối_tượng": [
+        ["danh_ngữ"],
+        ["determiner", "danh_ngữ"],
+        ["numeral", "danh_ngữ"],
+        ["pronoun"],
+        ["noun", "pronoun"],
+    ],
+    "hành_động": [  # hành động lên một đối tượng (optional) kèm tính chất (optional)
+        ["cụm_động_từ", "đối_tượng"],
+        ["cụm_động_từ", "đối_tượng", "tính_chất"],
+        ["cụm_động_từ", "tính_chất"],
+        ["cụm_động_từ"],
+    ],
+    "tính_chất": [
+        ["adjective"],
+        ["adjective", "conjunction", "tính_chất"],
+    ],
+    "cụm_động_từ": [
+        ["verb"],
+        ["verb", "verb"],  # trường họp "đi dạo" là cụm động từ
+        ["verb", "conjunction", "cụm_động_từ"],
+    ],
     "giới_ngữ": [["preposition", "danh_ngữ"]],
 }
 
