@@ -55,7 +55,7 @@ class Grammar:
 
         return symbols
 
-    def generate_sentence(self, depth: int = 3):
+    def generate_sentence(self, depth: int = 5):
         """
         depth: int, the depth of the tree, used to prevent infinite recursion
         if there are nonleave nodes, proceed to clean up
