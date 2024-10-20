@@ -4,6 +4,20 @@ Tính năng:
 - Sinh câu ngẫu nhiên
 - Phân tích cấu trúc câu của câu dựa trên ngữ pháp cho trước
 
+### Thư mục
+- `data/`: chứa dữ liệu
+    + `corpus.txt`: các câu ví dụ, dùng để tạo bigram model
+    + `data.yaml`: từ điển, lấy từ [underthesea](https://github.com/undertheseanlp/underthesea)
+    + `dict_obj.pkl`: dictionary object được serialized, phục vụ việc load từ điển nhanh hơn
+- `input/`: dữ liệu đầu vào
+    + `sentences.txt`: mỗi dòng chứa 1 câu để phân tích thành cây văn phạm
+- `models/`:
+    + `bigram.pkl`: model bigram
+- `output/`:
+    + `grammar.txt`: văn phạm mặc định
+    + `parsed-result.txt`: cây văn phạm được phân tích từ `input/`
+    + `samples.txt`: câu ngẫu nhiên, lên đến 10_000 câu
+
 ### Ngữ pháp tiếng Việt
 Ngữ pháp tiếng Việt được tạo từ các thành phần đơn giản, ví dụ như:
 - Trạng ngữ
