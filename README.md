@@ -11,8 +11,8 @@ Ngữ pháp tiếng Việt được tạo từ các thành phần đơn giản, 
 - Vị ngữ
 - Danh ngữ: là danh từ, cụm danh từ
 - Đối tượng (của một hành động): có thể là danh ngữ, đại từ thay thế
-- Hành động: là động từ, cụm động từ 
-<br>
+- Hành động: là động từ, cụm động từ
+
 Ngoài ra ta có các từ loại:
 - noun: danh từ
 - verb: động từ
@@ -36,9 +36,10 @@ Giải thuật:
     + Ta phân tích các câu trong dataset (bao gồm định nghĩa từ điển, ví dụ từ điển và corpus cho trước) để tạo mô hình bigram
     + Mô hình bigram sẽ chứa 2 danh sách xác suất: xác suất từ xuất hiện trong dataset và xác suất từ xuất hiện dựa trên từ ở trước
     + Trong trường hợp này, xác suất lần lượt là $P(w)$ và $P(w_{i} | w_{i-1})$
-    + Đối với từ đầu tiên, ta sẽ dựa trên xác suất từ xuất hiện mà chọn ngẫu nhiên dựa trên trọng số $w = P'(w_{i} | w_{i - 1})$
-    + Đối với các từ sau, ta sẽ lọc ra các từ mà có từ loại đúng theo cấu trúc đã sinh ra trước đó, tính lại xác suất: $P'(w_{i} | w_{i - 1}) = \frac{P(w_{i} | w_{i - 1})}{\sum_{i=1}^{P(w_{i} | w_{i - 1})}$
-    + Ta chọn ngẫu nhiên dựa trên trọng số $w = P'(w_{i} | w_{i - 1})$
+    + Đối với từ đầu tiên, ta sẽ dựa trên xác suất từ xuất hiện mà chọn ngẫu nhiên dựa trên trọng số $w = P(w)$
+    + Đối với các từ sau, ta sẽ lọc ra các từ mà có từ loại đúng theo cấu trúc đã sinh ra trước đó, tính lại xác suất: $P'(w_{j} | w_{i - 1}) = \frac{P(w_{j} | w_{i - 1})}{\sum_{j=1}^{} P(w_{j} | w_{i - 1})}$
+    + Trong đó, $w_{i}$ là từ ở vị trí $i$, $w_{j}$ là từ đã được phân tích trong corpus đứng sau $w_{i}$ và có tỉ lệ $P(w_{j} | w_{i - 1}) \gt 0$
+    + Ta chọn ngẫu nhiên dựa trên trọng số $w = P'(w_{j} | w_{i - 1})$
 
 ### Phân tích cấu trúc câu
 - Ta phân tích cấu trúc câu dựa trên Top Down Chart Parsing algorithm
