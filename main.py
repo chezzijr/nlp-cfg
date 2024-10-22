@@ -50,6 +50,13 @@ def parse_input_file():
                 f.write("()\n")
 
 if __name__ == "__main__":
+    # ensure the output directory exists
+    import os
+    os.makedirs("output", exist_ok=True)
+
+    print("Generating grammar file...")
+    with open("output/grammar.txt", "w") as f:
+        f.write(str(g))
     print("Generating random sentence...")
     generate_10k_sentences()
     print("Parse input file...")
