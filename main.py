@@ -3,7 +3,7 @@ from grammar import Grammar
 from rule import Rule
 import time
 import random
-import sys
+import os
 from nltk.parse import TopDownChartParser
 from nltk import CFG
 
@@ -51,7 +51,7 @@ def parse_input_file():
 
 if __name__ == "__main__":
     # ensure the output directory exists
-    import os
+    os.makedirs("input", exist_ok=True)
     os.makedirs("output", exist_ok=True)
 
     print("Generating grammar file...")
