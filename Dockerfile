@@ -1,4 +1,4 @@
-FROM python:3.11.10-alpine
+FROM python:3.8.20-alpine
 
 WORKDIR /nlp
 ENV ROOT=/nlp

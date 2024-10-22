@@ -1,3 +1,4 @@
+from __future__ import annotations
 import random
 
 """
@@ -66,10 +67,8 @@ rules = {
     "giới_ngữ": [["preposition", "danh_ngữ"]],
 }
 
-ReverseRule = dict[tuple[str, ...], str]
 
-
-class Rule(dict[str, list[list[str]]]):
+class Rule(dict):
     def __init__(self, rules: dict[str, list[list[str]]]):
         super().__init__(rules)
 
@@ -101,7 +100,7 @@ class Rule(dict[str, list[list[str]]]):
         """
         Instead of mapping constituents to their rules, map rules to their constituents
         """
-        reverse_rules: ReverseRule = {}
+        reverse_rules: dict[tuple[str, ...], str] = {}
         for k, v in self.items():
             for r in v:
                 reverse_rules[tuple(r)] = k

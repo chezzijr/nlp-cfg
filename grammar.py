@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dictionary import Dictionary
 import random
 from rule import Rule
