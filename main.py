@@ -50,16 +50,7 @@ def parse_input_file():
                 f.write("()\n")
 
 if __name__ == "__main__":
-    while True:
-        print("1. Generate random sentence")
-        print("2. Generate 10k sentences")
-        print("3. Parse input file")
-        print("4. Exit")
-        print("Enter your choice: ", end="")
-        choice = input()
-        if choice in ["1", "2", "3", "4"]:
-            func = [generate_random_sentence, generate_10k_sentences, parse_input_file, sys.exit][int(choice)-1]
-            func()
-            break
-        else:
-            print("Invalid choice. Please try again.")
+    print("Generating random sentence...")
+    generate_10k_sentences()
+    print("Parse input file...")
+    parse_input_file()
