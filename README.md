@@ -18,6 +18,19 @@ Tính năng:
     + `parsed-result.txt`: cây văn phạm được phân tích từ `input/`
     + `samples.txt`: câu ngẫu nhiên, lên đến 10_000 câu
 
+### Khởi chạy
+1. Với python 3.8.20:
+    - Tạo venv: `python3 -m venv .venv`
+    - Source env: `source .venv/bin/activate`
+    - Cài đặt thư viện: `pip3 install -r requirements.txt`
+    - Chạy: `.venv/bin/python3 main.py`
+2. Với [uv](https://docs.astral.sh/uv/) package manager:
+    - Cài đặt python 3.8.20, venv và thư viện với lệnh: `uv sync`
+    - Chạy: `uv run main.py`
+3. Với docker:
+    - Build image: `docker build -t nlp241 .`
+    - Run container: ``docker run --rm -d -v `pwd`/input:/nlp/input -v `pwd`/output:/nlp/output nlp241``
+
 ### Ngữ pháp tiếng Việt
 Ngữ pháp tiếng Việt được tạo từ các thành phần đơn giản, ví dụ như:
 - Trạng ngữ
