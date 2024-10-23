@@ -1,7 +1,7 @@
 S -> CN VN | TN CN VN
 TN -> adverb | giới_ngữ
 CN -> danh_ngữ
-VN -> hành_động | adverb hành_động | adjective | adverb adjective | VN conjunction VN
+VN -> hành_động | adverb hành_động | adjective | adverb adjective | VN conjunction VN | VN VN
 danh_ngữ -> noun giới_ngữ | noun conjunction danh_ngữ | noun
 đối_tượng -> danh_ngữ | determiner danh_ngữ | numeral danh_ngữ | pronoun | noun pronoun
 hành_động -> cụm_động_từ đối_tượng | cụm_động_từ đối_tượng tính_chất | cụm_động_từ tính_chất | cụm_động_từ
